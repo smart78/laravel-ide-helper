@@ -1,6 +1,4 @@
-<?php 
-
-use Illuminate\Support\Facades\Config;
+<?php
 
 return array(
 
@@ -26,7 +24,7 @@ return array(
     |
     */
 
-    'include_helpers' => false,
+    'include_helpers' => true,
 
     'helper_files' => array(
         base_path().'/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
@@ -43,7 +41,28 @@ return array(
     */
 
     'model_locations' => array(
-        'app/models',
+        'app'
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model locations to exclude
+    |--------------------------------------------------------------------------
+    |
+    | Define in which directories the ide-helper:models command should exclude
+    | when looking for models - recursive.
+    |
+    */
+
+    'ignored_directories' => array(
+        'app/Commands',
+        'app/Console',
+        'app/Events',
+        'app/Exceptions',
+        'app/Handlers',
+        'app/Http',
+        'app/Providers',
+        'app/Services'
     ),
 
 
@@ -57,7 +76,6 @@ return array(
     */
 
     'extra' => array(
-        'Artisan' => array('Illuminate\Foundation\Artisan'),
         'Eloquent' => array('Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'),
         'Session' => array('Illuminate\Session\Store'),
     ),
@@ -74,7 +92,7 @@ return array(
             'emergency' => 'Monolog\Logger::addEmergency',
         )
     ),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Interface implementations
@@ -84,9 +102,10 @@ return array(
     | are detected by the helpers, others can be listed below.
     |
     */
+
     
     'interfaces' => array(
-        '\Illuminate\Auth\UserInterface' => Config::get('auth.model', 'User'),
+        '\Illuminate\Contracts\Auth\Authenticatable' => Config::get('auth.model', 'User'),
     )
 
 );
